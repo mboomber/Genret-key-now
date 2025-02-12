@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Generator</title>
+</head>
+<body>
+    <h2>Random Key Generator</h2>
+    <button onclick="generateKey()">Generate Key</button>
+    <p id="keyDisplay">Your key will appear here</p>
+
+    <script>
+        async function generateKey() {
+            try {
+                // keys.html file se JSON data fetch karna
+                let response = await fetch('keys.html');
+                let text = await response.text();
+
+                // JSON string extract karna
+                let jsonStart = text.indexOf('[');
+                let jsonEnd = text.lastIndexOf(']') + 1;
+                let jsonData = text.substring(jsonStart, jsonEnd);
+
+                // JSON parse karna
+                let keys = JSON.parse(jsonData);
+
+                // Random key select karna
+                let randomKey = keys[Math.floor(Math.random() * keys.length)];
+
+                // Key display karna
+                document.getElementById('keyDisplay').innerText = "Generated Key: " + randomKey;
+            } catch (error) {
+                console.error('Error fetching keys:', error);
+                document.getElementById('keyDisplay').innerText = "Error fetching keys!";
+            }
+        }
+    </script>
+</body>
+</html>
