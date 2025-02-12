@@ -1,1 +1,1 @@
-# Genret-key-now
+# GENERET KEY FOR FLAS BOMBER
